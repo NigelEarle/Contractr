@@ -37,4 +37,4 @@ const Contractr = () => (
   </View>
 );
 
-AppRegistry.registerComponent('Contractor', () => Contractr);
+AppRegistry.registerComponent('Contractr', () => Contractr);
