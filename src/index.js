@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -25,16 +26,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const Contractr = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>
-      Welcome to React Native!
-    </Text>
-    <Text style={styles.instructions}>
-      Press Cmd+R to reload,{'\n'}
-      Cmd+D or shake for dev menu
-    </Text>
-  </View>
-);
+class Contractr {
+
+  static handlePress() {
+    console.log('hello');
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
+        <Button
+          onPress={this.handlePress}
+          title="Facebook"
+        />
+        <Text style={styles.instructions}>
+          Press Cmd to reload,{'\n'}
+          Cmd+D or shake for dev menu
+        </Text>
+      </View>
+    );
+  }
+}
 
 AppRegistry.registerComponent('Contractr', () => Contractr);
