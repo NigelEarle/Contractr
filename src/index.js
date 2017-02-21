@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { facebook } from 'react-native-simple-auth';
 import {
   AppRegistry,
   StyleSheet,
@@ -26,10 +27,26 @@ const styles = StyleSheet.create({
   },
 });
 
-class Contractr {
+class Contractr extends Component {
+  constructor(props) {
+    super(props);
+    this.handlePress = this.handlePress.bind(this);
+  }
 
-  static handlePress() {
-    console.log('hello');
+  handlePress() {
+    const config = {
+      appId: '1851993958375026',
+      callback: 'fb1851993958375026://authorize',
+    };
+    facebook(config)
+    .then((info) => {
+      this.setState({
+        data: info
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   render() {

@@ -32,6 +32,16 @@
 				<string>contractr</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.contractr.ios</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1851993958375026</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
