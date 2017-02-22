@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { facebook, google } from 'react-native-simple-auth';
-import { Facebook, Google } from './config/config.json';
 import {
   AppRegistry,
   StyleSheet,
@@ -8,6 +7,8 @@ import {
   View,
   Button,
 } from 'react-native';
+
+import { Facebook, Google } from './config/config.json';
 
 const styles = StyleSheet.create({
   container: {
