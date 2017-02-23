@@ -7,14 +7,14 @@ import {
 
 import { Facebook, Google } from '../../config/OAuth.json';
 
-class LoginContainer {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleFbLogin = this.handleFbLogin.bind(this);
-  //   this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
-  // }
+class LoginContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.handleFbLogin = this.handleFbLogin.bind(this);
+    this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+  }
 
-  static handleFbLogin() {
+  handleFbLogin() {
     const FacebookConfig = {
       appId: Facebook.appId,
       callback: Facebook.callback,
@@ -29,7 +29,7 @@ class LoginContainer {
     });
   }
 
-  static handleGoogleLogin() {
+  handleGoogleLogin() {
     const GoogleConfig = {
       appId: Google.appId,
       callback: Google.callback,
