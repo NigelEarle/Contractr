@@ -18,7 +18,7 @@ const mapStateToProps = state => (
 
 ContractrRouter.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.shape.isRequired,
+  nav: PropTypes.any.isRequired,
 };
 
 export default connect(mapStateToProps, {})(ContractrRouter);
