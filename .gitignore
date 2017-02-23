@@ -53,4 +53,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 
-src/config
+src/config/OAuth.json
