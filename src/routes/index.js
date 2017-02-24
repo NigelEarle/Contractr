@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
-import Navigator from '../config/Navigator';
+import Navigator from '../config/navigator';
 
 const ContractrRouter = ({ dispatch, nav }) => (
   <Navigator

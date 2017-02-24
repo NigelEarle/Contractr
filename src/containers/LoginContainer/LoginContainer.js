@@ -1,20 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { facebook, google } from 'react-native-simple-auth';
 import {
   View,
   Button,
 } from 'react-native';
 
-import { Facebook, Google } from '../../config/OAuth.json';
+import { oauthSignin } from '../../actions/oauth';
+import { Facebook, Google } from '../../config/oauth.json';
 
 class LoginContainer extends Component {
+  static propTypes = {
+    oauthSignin: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.handleFbLogin = this.handleFbLogin.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
 
+
   handleFbLogin() {
+    this.props.oauthSignin();
     const FacebookConfig = {
       appId: Facebook.appId,
       callback: Facebook.callback,
@@ -30,6 +38,7 @@ class LoginContainer extends Component {
   }
 
   handleGoogleLogin() {
+    this.props.oauthSignin();
     const GoogleConfig = {
       appId: Google.appId,
       callback: Google.callback,
@@ -60,4 +69,11 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+const mapStateToProps = state => (
+  {
+    state,
+  }
+);
+
+
+export default connect(mapStateToProps, { oauthSignin })(LoginContainer);
