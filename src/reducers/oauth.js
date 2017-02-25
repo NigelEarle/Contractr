@@ -1,54 +1,68 @@
 import { handleActions } from 'redux-actions';
 import {
   OAUTH_SIGN_IN,
-  // OAUTH_SIGN_IN_SUCCESS,
-  // OAUTH_SIGN_IN_ERROR,
-  OAUTH_SET_TOKEN,
-  OAUTH_DISCARD_TOKEN,
-  SET_USER,
+  OAUTH_SIGN_IN_SUCCESS,
+  OAUTH_SIGN_IN_ERROR,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR,
 } from '../actions/oauth';
 
 const initialState = {
   isPending: false,
   provider: '',
-  token: '',
+  token: null,
+  refreshToken: null,
+  err: null,
   user: {
     given_name: '',
     surname: '',
     email: '',
+    profile_pic: '',
   }
 };
 
 export default handleActions({
-  [OAUTH_SIGN_IN]: state => (
+  [OAUTH_SIGN_IN]: (state, action) => (
     {
       ...state,
-      isPending: true
+      provider: action.provider,
+      isPending: true,
     }
   ),
-  // [OAUTH_SIGN_IN_SUCCESS]: state => (
-  //   {
-  //     ...state,
-  //     isPending: false
-  //   }
-  // ),
-  [OAUTH_SET_TOKEN]: (state, action) => (
+
+  [OAUTH_SIGN_IN_SUCCESS]: (state, action) => (
     {
       ...state,
       isPending: false,
       token: action.token,
+      refreshToken: action.refreshToken ? action.refreshToken : null,
+      user: {
+        ...action.user
+      },
     }
   ),
-  [OAUTH_DISCARD_TOKEN]: state => (
+  [OAUTH_SIGN_IN_ERROR]: state => (
     {
       ...state,
     }
-
   ),
-  [SET_USER]: (state, action) => (
+  [LOGOUT_SUCCESS]: state => (
     {
       ...state,
-      user: action.user
+      token: null,
+      refreshToken: null,
+      user: {
+        given_name: '',
+        surname: '',
+        email: '',
+        profile_pic: '',
+      }
+    }
+  ),
+  [LOGOUT_ERROR]: (state, action) => (
+    {
+      ...state,
+      err: action.err,
     }
   ),
 }, initialState);

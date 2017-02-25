@@ -81,4 +81,6 @@ const mapStateToProps = state => (
 );
 
 
-export default connect(mapStateToProps, { oauthSignin })(LoginContainer);
+export default connect(mapStateToProps, {
+  oauthSignin,
+})(LoginContainer);
