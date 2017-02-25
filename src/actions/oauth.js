@@ -1,4 +1,4 @@
-import OAuthService from '../services/oauth';
+import { OAuthService } from '../services/oauth';
 
 export const OAUTH_SIGN_IN = 'auth/OAUTH_SIGN_IN';
 export const OAUTH_SIGN_IN_SUCCESS = 'auth/OAUTH_SIGN_IN_SUCCESS'; // incorporate success and fail actions for all
