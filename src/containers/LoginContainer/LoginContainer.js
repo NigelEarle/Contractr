@@ -22,7 +22,12 @@ class LoginContainer extends Component {
 
 
   handleFbLogin() {
-    this.props.oauthSignin();
+    const {
+      oauthSignin,
+      oauthSigninSuccess,
+      oauthSigninFailure
+    } = this.props;
+    oauthSignin();
     const FacebookConfig = {
       appId: Facebook.appId,
       callback: Facebook.callback,
