@@ -5,7 +5,7 @@ const login = (accessToken, user) => {
     name,
     email,
   } = user;
-  console.log('IN SERVICES');
+
   return xhrUtil({
     path: '/login',
     method: 'POST',

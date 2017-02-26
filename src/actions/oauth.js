@@ -51,7 +51,6 @@ export const logout = () => (dispatch) => {
 export const oauthSignInComplete = (credentials, user) => (dispatch) => {
   // Save user to REST API
   const { access_token } = credentials;
-  console.log('OAUTH SIGN IN COMPLETE', OAuthService);
   return OAuthService.login(access_token, user)
   .then((result) => {
     dispatch(oauthSignInSuccess(result));

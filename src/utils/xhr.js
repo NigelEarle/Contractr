@@ -24,8 +24,6 @@ export default ({
     options.body = { ...body };
   }
 
-  console.log('OPTIONS IN XHR', options);
-
   // return rp(options)
   //   .catch((err) => {
   //     console.log(err);
