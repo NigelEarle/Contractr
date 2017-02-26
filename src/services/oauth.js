@@ -1,11 +1,11 @@
-import xhrUtil from '../utils';
+import { xhrUtil } from '../utils/';
 
 const login = (accessToken, user) => {
   const {
     name,
     email,
   } = user;
-
+  console.log('IN SERVICES');
   return xhrUtil({
     path: '/login',
     method: 'POST',
