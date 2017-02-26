@@ -14,10 +14,9 @@ const initialState = {
   refreshToken: null,
   err: null,
   user: {
-    given_name: '',
-    surname: '',
+    name: '',
     email: '',
-    profile_pic: '',
+    picture: '',
   }
 };
 
@@ -41,9 +40,10 @@ export default handleActions({
       },
     }
   ),
-  [OAUTH_SIGN_IN_ERROR]: state => (
+  [OAUTH_SIGN_IN_ERROR]: (state, action) => (
     {
       ...state,
+      err: action.err,
     }
   ),
   [LOGOUT_SUCCESS]: state => (
@@ -52,10 +52,9 @@ export default handleActions({
       token: null,
       refreshToken: null,
       user: {
-        given_name: '',
-        surname: '',
+        name: '',
         email: '',
-        profile_pic: '',
+        picture: '',
       }
     }
   ),

@@ -1,4 +1,3 @@
-// import rp from 'request-promise';
 
 export default ({
   endpoint = '/api', // adjust for env - config
@@ -7,11 +6,12 @@ export default ({
   body,
   accessToken,
 }) => {
+  const URL = `http://localhost:3000${endpoint}${path}`; // adjust for env - config
   const options = {
     method,
-    uri: `http://localhost:3000${endpoint}${path}`, // adjust for env - config
     headers: {
-      'content-type': 'application/json;charset=UTF-8'
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
     },
   };
 
@@ -21,11 +21,9 @@ export default ({
 
   if (body) {
     options.json = true;
-    options.body = { ...body };
+    options.body = JSON.stringify({ ...body });
   }
 
-  // return rp(options)
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
+  return fetch(URL, options)
+    .catch(err => console.log(err));
 };
