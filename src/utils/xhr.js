@@ -1,4 +1,4 @@
-import rp from 'request-promise';
+// import rp from 'request-promise';
 
 export default ({
   endpoint = '/api', // adjust for env - config
@@ -16,19 +16,15 @@ export default ({
   };
 
   if (accessToken) {
-    options.access_token = accessToken;
+    options.headers['access-token'] = accessToken;
   }
 
   if (body) {
     options.json = true;
-    options.body = {};
-    // set dyanmic body key values
+    options.body = { ...body };
   }
 
   return rp(options)
-    .then((result) => {
-      console.log(result);
-    })
     .catch((err) => {
       console.log(err);
     });

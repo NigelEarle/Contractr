@@ -50,6 +50,12 @@ export const logout = () => (dispatch) => {
 
 export const oauthSignInComplete = (credentials, user) => (dispatch) => {
   // Save user to REST API
-  dispatch(oauthSignInSuccess(token, user)); // result from server on successful store of user
-  oauthSignInError(err);
+  const { access_token } = credentials;
+  return OAuthService.login(access_token, user)
+  .then((result) => {
+    dispatch(oauthSignInSuccess(result));
+  })
+  .catch((err) => {
+    oauthSignInError(err);
+  });
 };

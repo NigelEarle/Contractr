@@ -6,52 +6,45 @@ import {
   Button,
 } from 'react-native';
 
-import { oauthSignin } from '../../actions/oauth';
+import {
+  oauthSignInComplete,
+  oauthSignInError,
+} from '../../actions/oauth';
+
 import { Facebook, Google } from '../../config/oauth.json';
 
 class LoginContainer extends Component {
-  static propTypes = {
-    oauthSignin: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.handleFbLogin = this.handleFbLogin.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
   }
 
-
   handleFbLogin() {
-    const {
-      oauthSignin,
-      oauthSigninSuccess,
-      oauthSigninFailure
-    } = this.props;
-    oauthSignin();
     const FacebookConfig = {
       appId: Facebook.appId,
       callback: Facebook.callback,
     };
 
     facebook(FacebookConfig)
-    .then((info) => {
-      console.log(info);
+    .then(({ user, credentials }) => {
+      this.props.oauthSignInComplete(credentials, user);
     })
     .catch((err) => {
-      console.log(err);
+      this.props.oauthSignInError(err);
     });
   }
 
   handleGoogleLogin() {
-    this.props.oauthSignin();
     const GoogleConfig = {
       appId: Google.appId,
       callback: Google.callback,
     };
 
     google(GoogleConfig)
-    .then((result) => {
-      console.log(result);
+    .then(({ user, credentials }) => {
+      console.log(user);
+      console.log(credentials);
     })
     .catch((err) => {
       console.log(err);
@@ -74,13 +67,21 @@ class LoginContainer extends Component {
   }
 }
 
+LoginContainer.defaultProps = {
+  oauthSignInComplete: () => {},
+  oauthSignInError: () => {},
+};
+
+LoginContainer.propTypes = {
+  oauthSignInComplete: PropTypes.func.isRequired,
+  oauthSignInError: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => (
-  {
-    state,
-  }
+  { state }
 );
 
-
 export default connect(mapStateToProps, {
-  oauthSignin,
+  oauthSignInComplete,
+  oauthSignInError,
 })(LoginContainer);
