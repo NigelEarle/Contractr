@@ -16,6 +16,11 @@ const mapStateToProps = state => (
   { nav: state.nav }
 );
 
+ContractrRouter.defaultProps = {
+  dispatch: () => {},
+  nav: {},
+};
+
 ContractrRouter.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.any.isRequired,
