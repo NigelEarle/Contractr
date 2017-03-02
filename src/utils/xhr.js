@@ -10,13 +10,13 @@ export default ({
   const options = {
     method,
     headers: {
-      Accept: 'application/json',
+      'Accept': 'application/json', // eslint-disable-line
       'Content-Type': 'application/json;charset=UTF-8'
     },
   };
 
   if (accessToken) {
-    options.headers['access-token'] = accessToken;
+    options.headers.Authorization = `Bearer ${accessToken}`;
   }
 
   if (body) {
