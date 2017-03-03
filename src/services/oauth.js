@@ -1,19 +1,29 @@
 import { xhrUtil } from '../utils/';
 
-const login = (accessToken, user) => {
+const register = (credentials, user, provider) => {
   const {
+    access_token,
+  } = credentials;
+
+  const {
+    id,
     name,
     email,
   } = user;
 
+  const userPayload = {
+    name,
+    email,
+    token: access_token,
+    picture: user.picture ? user.picture : null,
+    [`${provider}_id`]: id,
+  };
+
   return xhrUtil({
-    path: '/',
+    path: '/register',
     method: 'POST',
-    accessToken,
     body: {
-      name,
-      email,
-      picture: user.picture ? user.picture : null,
+      ...userPayload
     }
   });
 };
@@ -24,7 +34,7 @@ const logout = () => (
 );
 
 const OAuthService = {
-  login,
+  register,
   logout,
 };
 

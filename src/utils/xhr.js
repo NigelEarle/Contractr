@@ -12,7 +12,7 @@ export default ({
     method,
     headers: {
       'Accept': 'application/json', // eslint-disable-line
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json;charset=UTF-8',
     },
   };
 

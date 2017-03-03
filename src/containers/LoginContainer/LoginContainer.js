@@ -28,10 +28,10 @@ class LoginContainer extends Component {
 
     facebook(FacebookConfig)
     .then(({ user, credentials }) => {
-      this.props.oauthSignInComplete(credentials, user);
+      this.props.oauthSignInComplete(credentials, user, 'facebook');
     })
     .catch((err) => {
-      this.props.oauthSignInError(err);
+      this.props.oauthSignInError(err, 'facebook');
     });
   }
 
@@ -43,11 +43,10 @@ class LoginContainer extends Component {
 
     google(GoogleConfig)
     .then(({ user, credentials }) => {
-      console.log(user);
-      console.log(credentials);
+      this.props.oauthSignInComplete(credentials, user, 'google');
     })
     .catch((err) => {
-      console.log(err);
+      this.props.oauthSignInError(err, 'google');
     });
   }
 
