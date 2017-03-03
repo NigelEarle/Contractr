@@ -1,12 +1,13 @@
+import CONFIG from '../config/env';
 
 export default ({
-  endpoint = '/api', // adjust for env - config
+  endpoint = CONFIG.API_SERVER.ENDPOINT,
   path = '/',
   method = 'GET',
   body,
   accessToken,
 }) => {
-  const URL = `http://localhost:3000${endpoint}${path}`; // adjust for env - config
+  const URL = `${CONFIG.API_SERVER.HOSTNAME}${endpoint}${path}`;
   const options = {
     method,
     headers: {
@@ -16,7 +17,7 @@ export default ({
   };
 
   if (accessToken) {
-    options.headers.Authorization = `Bearer ${accessToken}`;
+    options.headers['Authorization'] = `Bearer ${accessToken}`;
   }
 
   if (body) {

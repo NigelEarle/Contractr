@@ -7,7 +7,7 @@ const login = (accessToken, user) => {
   } = user;
 
   return xhrUtil({
-    path: '/login',
+    path: '/',
     method: 'POST',
     accessToken,
     body: {

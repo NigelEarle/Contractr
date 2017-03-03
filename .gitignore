@@ -54,3 +54,4 @@ fastlane/Preview.html
 fastlane/screenshots
 
 src/config/OAuth.json
+src/config/env
