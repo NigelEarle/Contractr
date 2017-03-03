@@ -8,7 +8,8 @@ export const OAUTH_SIGN_IN_SUCCESS = 'auth/OAUTH_SIGN_IN_SUCCESS'; // incorporat
 export const OAUTH_SIGN_IN_ERROR = 'auth/OAUTH_SIGN_IN_ERROR';
 export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'auth/LOGOUT_ERROR';
-const ACCESS_TOKEN = 'access-token';
+export const ACCESS_TOKEN = 'token';
+
 export const oauthSignIn = provider => dispatch => (
   dispatch({
     type: OAUTH_SIGN_IN,
@@ -24,10 +25,9 @@ export const oauthSignInError = err => dispatch => (
   })
 );
 
-export const oauthSignInSuccess = (token, user) => (
+export const oauthSignInSuccess = (user) => (
   {
     type: OAUTH_SIGN_IN_SUCCESS,
-    token,
     user,
   }
 );
@@ -55,8 +55,26 @@ export const oauthSignInComplete = (credentials, user, provider) => dispatch => 
   // Save user to REST API
   OAuthService.register(credentials, user, provider)
   .then((jsonResponse) => {
-    AsyncStorage.setItem(ACCESS_TOKEN, jsonResponse.token);
-    dispatch(oauthSignInSuccess(jsonResponse));
+    const {
+      name,
+      email,
+      picture,
+      token,
+      facebook_id,
+      google_id,
+    } = jsonResponse;
+
+    const saveToRedux = {
+      name,
+      email,
+      picture,
+      token,
+      facebook_id,
+      google_id,
+    };
+
+    AsyncStorage.setItem(ACCESS_TOKEN, token);
+    dispatch(oauthSignInSuccess(saveToRedux));
   })
   .catch((err) => {
     oauthSignInError(err);

@@ -10,13 +10,15 @@ import {
 const initialState = {
   isPending: false,
   provider: '',
-  token: null,
   refreshToken: null,
   err: null,
   user: {
     name: '',
     email: '',
-    picture: '',
+    picture: null,
+    token: null,
+    facebook_id: null,
+    google_id: null,
   }
 };
 
@@ -33,7 +35,6 @@ export default handleActions({
     {
       ...state,
       isPending: false,
-      token: action.token,
       refreshToken: action.refreshToken ? action.refreshToken : null,
       user: {
         ...action.user
