@@ -10,6 +10,7 @@ export default ({
   const URL = `${CONFIG.API_SERVER.HOSTNAME}${endpoint}${path}`;
   const options = {
     method,
+    mode: 'cors',
     headers: {
       'Accept': 'application/json', // eslint-disable-line
       'Content-Type': 'application/json;charset=UTF-8',
@@ -26,5 +27,6 @@ export default ({
   }
 
   return fetch(URL, options)
+    .then(response => response.json())
     .catch(err => console.log(err));
 };

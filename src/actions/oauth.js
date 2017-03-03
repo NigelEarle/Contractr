@@ -1,11 +1,14 @@
 import OAuthService from '../services/oauth';
+import {
+  AsyncStorage,
+} from 'react-native';
 
 export const OAUTH_SIGN_IN = 'auth/OAUTH_SIGN_IN';
 export const OAUTH_SIGN_IN_SUCCESS = 'auth/OAUTH_SIGN_IN_SUCCESS'; // incorporate success and fail actions for all
 export const OAUTH_SIGN_IN_ERROR = 'auth/OAUTH_SIGN_IN_ERROR';
 export const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 export const LOGOUT_ERROR = 'auth/LOGOUT_ERROR';
-
+const ACCESS_TOKEN = 'access-token';
 export const oauthSignIn = provider => dispatch => (
   dispatch({
     type: OAUTH_SIGN_IN,
@@ -51,8 +54,9 @@ export const logout = () => (dispatch) => {
 export const oauthSignInComplete = (credentials, user, provider) => dispatch => (
   // Save user to REST API
   OAuthService.register(credentials, user, provider)
-  .then((result) => {
-    dispatch(oauthSignInSuccess(result));
+  .then((jsonResponse) => {
+    AsyncStorage.setItem(ACCESS_TOKEN, jsonResponse.token);
+    dispatch(oauthSignInSuccess(jsonResponse));
   })
   .catch((err) => {
     oauthSignInError(err);
