@@ -1,7 +1,5 @@
+import { AsyncStorage } from 'react-native';
 import OAuthService from '../services/oauth';
-import {
-  AsyncStorage,
-} from 'react-native';
 
 export const OAUTH_SIGN_IN = 'auth/OAUTH_SIGN_IN';
 export const OAUTH_SIGN_IN_SUCCESS = 'auth/OAUTH_SIGN_IN_SUCCESS'; // incorporate success and fail actions for all
@@ -25,7 +23,7 @@ export const oauthSignInError = err => dispatch => (
   })
 );
 
-export const oauthSignInSuccess = (user) => (
+export const oauthSignInSuccess = user => (
   {
     type: OAUTH_SIGN_IN_SUCCESS,
     user,
