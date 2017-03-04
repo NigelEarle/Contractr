@@ -10,5 +10,5 @@ const AppRouteConfig = {
   Jobs: { screen: JobsContainer },
 };
 
-const AppNavigator = TabNavigator(AppRouteConfig); // eslint-disable-line
+const AppNavigator = new TabNavigator(AppRouteConfig);
 export default AppNavigator;

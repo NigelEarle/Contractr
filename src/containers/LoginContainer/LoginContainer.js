@@ -4,6 +4,7 @@ import { facebook, google } from 'react-native-simple-auth';
 import {
   View,
   Button,
+  AsyncStorage,
 } from 'react-native';
 
 import {
@@ -14,11 +15,14 @@ import {
 
 import { Facebook, Google } from '../../config/oauth.json';
 
+const ACCESS_TOKEN = 'token';
+
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.handleFbLogin = this.handleFbLogin.bind(this);
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+    this.checkToken = this.checkToken.bind(this);
   }
 
   handleFbLogin() {
@@ -31,9 +35,10 @@ class LoginContainer extends Component {
     facebook(FacebookConfig)
     .then(({ user, credentials }) => {
       this.props.oauthSignInComplete(credentials, user, this.props.provider);
+      this.checkToken();
     })
     .catch((err) => {
-      this.props.oauthSignInError(err, 'facebook');
+      this.props.oauthSignInError(err, this.props.provider);
     });
   }
 
@@ -49,8 +54,15 @@ class LoginContainer extends Component {
       this.props.oauthSignInComplete(credentials, user, this.props.provider);
     })
     .catch((err) => {
-      this.props.oauthSignInError(err, 'google');
+      this.props.oauthSignInError(err, this.provider.provider);
     });
+  }
+
+  async checkToken() {
+    const token = await AsyncStorage.getItem(ACCESS_TOKEN);
+    if (token) {
+
+    }
   }
 
   render() {
@@ -71,6 +83,7 @@ class LoginContainer extends Component {
 
 LoginContainer.defaultProps = {
   provider: '',
+  navigate: () => {},
   oauthSignIn: () => {},
   oauthSignInComplete: () => {},
   oauthSignInError: () => {},
@@ -78,6 +91,7 @@ LoginContainer.defaultProps = {
 
 LoginContainer.propTypes = {
   provider: PropTypes.string.isRequired,
+  navigate: PropTypes.func.isRequired,
   oauthSignIn: PropTypes.func.isRequired,
   oauthSignInComplete: PropTypes.func.isRequired,
   oauthSignInError: PropTypes.func.isRequired,
