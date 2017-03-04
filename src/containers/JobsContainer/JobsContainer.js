@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {
   View,
+  Text,
 } from 'react-native';
 
 class JobsContainer extends Component {
@@ -12,7 +13,7 @@ class JobsContainer extends Component {
   render() {
     return (
       <View>
-        Jobs Container
+        <Text>Jobs Container</Text>
       </View>
     );
   }
