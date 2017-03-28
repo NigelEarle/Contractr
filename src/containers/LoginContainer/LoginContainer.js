@@ -60,9 +60,7 @@ class LoginContainer extends Component {
 
   async checkToken() {
     const token = await AsyncStorage.getItem(ACCESS_TOKEN);
-    if (token) {
-
-    }
+    if (token) { /* react-nav dispatch to new screen? */ }
   }
 
   render() {
